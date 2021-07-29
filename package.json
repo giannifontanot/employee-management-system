@@ -1,0 +1,22 @@
+{
+  "name": "12-MySQL-Employee-Management-System",
+  "version": "1.0.0",
+  "description": "",
+  "main": "../12-MySQL-Employee-Management-System/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "clear": "^0.1.0",
+    "console.table": "^0.10.0",
+    "figlet": "^1.5.0",
+    "inquirer": "^8.1.2",
+    "mysql2": "^2.2.5"
+  },
+  "devDependencies": {
+    "chalk": "^4.1.1"
+  }
+}
