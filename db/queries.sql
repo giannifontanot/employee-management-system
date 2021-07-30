@@ -21,7 +21,15 @@ where employeeTable.role_id = role.id
   and managerTable.id = employeeTable.manager_id;
 # --------------------------------------------
 insert into company_db.department (name)
-values('Production');
+values ('Production');
 # --------------------------------------------
 insert into company_db.role (title, salary, department_id)
-values('Manufacturing Engineer', 100000,1);
+values ('Manufacturing Engineer', 100000, 1);
+# --------------------------------------------
+SELECT id, name
+FROM company_db.department;
+# --------------------------------------------
+SELECT id, CONCAT("'",title,"'") as title
+FROM company_db.role
+order by id;
+

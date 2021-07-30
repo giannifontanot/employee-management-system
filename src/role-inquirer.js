@@ -40,4 +40,12 @@ module.exports = {
     insertNewRole: async (pool, title, salary, department_id) => {
         return await pool.execute(queries.insert_new_role(title, salary, department_id));
     },
+    returnRoleArray: async (pool) => {
+        const [ rows , fields] = await pool.execute(queries.select_role_list());
+
+        return rows;
+
+    },
+
+
 };

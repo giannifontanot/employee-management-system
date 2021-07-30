@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const console_table = require('console.table');
 const queries = require("../../12-MySQL-Employee-Management-System/db/queries");
+const chalk = require("chalk");
 
 module.exports = {
     /**
@@ -12,7 +13,7 @@ module.exports = {
             {
                 name: 'department',
                 type: 'input',
-                message: 'Enter the name of the new department:',
+                message: chalk.yellow('Enter the name of the new department:'),
                 validate: validateNewDepartment,
             },
 
@@ -21,19 +22,16 @@ module.exports = {
     },
     selectAll: async (pool) => {
         const [rows, fields] = await pool.execute(queries.select_department_all());
-        console.table(rows);
         return '';
 
     },
     returnDepartmentArray: async (pool) => {
         const [ rows , fields] = await pool.execute(queries.select_department_all());
-         console.log("rows: " + JSON.stringify(rows));
         return rows;
 
     },
     insertNewDepartment: async (pool, department) => {
         const [rows, fields] = await pool.execute(queries.insert_new_department(department));
-        console.table(rows);
         return '';
     },
     method3: () => {

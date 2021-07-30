@@ -22,7 +22,7 @@ module.exports = {
                      company_db.role,
                      company_db.employee as managerTable
                 where employeeTable.role_id = role.id
-                  
+
                   and managerTable.id = employeeTable.manager_id`;
     },
     insert_new_department: (department) => {
@@ -30,9 +30,22 @@ module.exports = {
                 values ('${department}');`;
     },
     insert_new_role: (title, salary, department_id) => {
-        console.log("insert into company_db.role (title, salary, department_id) values ('"+title+"', "+salary+", "+department_id+");");
 
         return `insert into company_db.role (title, salary, department_id)
-                values ('${title}',${salary},${department_id});`;
+                values ('${title}', ${salary}, ${department_id});`;
+    },
+    insert_new_employee: (first_name, last_name, role_id, manager_id) => {
+
+        return `insert into company_db.employee (first_name, last_name, role_id, manager_id)
+                values ('${first_name}', '${last_name}', ${role_id}, ${manager_id})`;
+    },
+    select_manager_list: () => {
+        return `SELECT id, concat(first_name, " ", last_name) as name
+                FROM company_db.employee`;
+
+    },
+    select_role_list: () => {
+        return `SELECT id, title as name
+                FROM company_db.role`;
     },
 };

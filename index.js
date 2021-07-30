@@ -55,9 +55,9 @@ run = async () => {
                 break;
             }
             case 'Add a role': {// !OK
+                let department_id = 0;
                 let departmentArray = await department_inquirer.returnDepartmentArray(pool);
                 let {title, salary, department_name} = await role_inquirer.fillData(departmentArray);
-                let department_id = 0;
                 departmentArray.every((element, index, array) => {
                     const {id, name} = element;
                     if (department_name === name) {
@@ -72,10 +72,31 @@ run = async () => {
             // -----------------------------------------------------------------------------------------------------------------------------------
             }
             case 'Add an employee': { // !HERE
-                let {role_id} = await role_inquirer.select('role_id');
-                let {manager_id} = await manager_inquirer.select('manager_id');
-                let {first_name, last_name} = await employee_inquirer.fillData();
-                let {err} = await employee_inquirer.insertNewEmployee(first_name, last_name, role_id, manager_id);
+                let role_id = 0;
+                let manager_id = 0;
+                let roleArray = await role_inquirer.returnRoleArray(pool); // !--------------
+                let managerArray = await employee_inquirer.returnManagerArray(pool);
+                let {first_name, last_name, role_name, manager_name} = await employee_inquirer.fillData(roleArray, managerArray);
+
+                roleArray.every((element, index, array) => {
+                    const {id, name} = element;
+                    if (role_name === name) {
+                        role_id = id;
+                        return false;
+                    }
+                    return true;
+                });
+
+                managerArray.every((element, index, array) => {
+                    const {id, name} = element;
+                    if (manager_name === name) {
+                        manager_id = id;
+                        return false;
+                    }
+                    return true;
+                });
+
+                let {err} = await employee_inquirer.insertNewEmployee(pool, first_name, last_name, role_id, manager_id);
                 break;
             }
             case 'Update an employee role': {
