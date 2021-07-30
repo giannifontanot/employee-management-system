@@ -34,7 +34,7 @@ run = async () => {
             queueLimit: 0
         });
 
-        // What else do you want to do?
+        // What do you want to do?
         const {option} = await main_menu_inquirer.getOption();
         switch (option) {
             case 'View all departments': {// !OK
@@ -67,16 +67,20 @@ run = async () => {
                     return true;
                 });
 
-                let { err } = await role_inquirer.insertNewRole(pool, title, salary, department_id);
+                let {err} = await role_inquirer.insertNewRole(pool, title, salary, department_id);
                 break;
-            // -----------------------------------------------------------------------------------------------------------------------------------
             }
-            case 'Add an employee': { // !HERE
+            case 'Add an employee': { // !OK
                 let role_id = 0;
                 let manager_id = 0;
-                let roleArray = await role_inquirer.returnRoleArray(pool); // !--------------
+                let roleArray = await role_inquirer.returnRoleArray(pool);
                 let managerArray = await employee_inquirer.returnManagerArray(pool);
-                let {first_name, last_name, role_name, manager_name} = await employee_inquirer.fillData(roleArray, managerArray);
+                let {
+                    first_name,
+                    last_name,
+                    role_name,
+                    manager_name
+                } = await employee_inquirer.fillData(roleArray, managerArray);
 
                 roleArray.every((element, index, array) => {
                     const {id, name} = element;
@@ -99,13 +103,30 @@ run = async () => {
                 let {err} = await employee_inquirer.insertNewEmployee(pool, first_name, last_name, role_id, manager_id);
                 break;
             }
-            case 'Update an employee role': {
-                let {employee_id} = await employee_inquirer.select();
-                let {role_id} = await role_inquirer.select('role_id');
-                let {err} = await employee_inquirer.update('employee_id', 'role_id');
+            // -----------------------------------------------------------------------------------------------------------------------------------
+            case 'Update an employee role': { // !HERE
+                let employeeArray = await employee_inquirer.returnEmployeeArray(pool);
+                let {employee_name} = await employee_inquirer.chooseEmployee(employeeArray);
+                let employee_id = findId(undefined, employeeArray);
+                let roleArray = await role_inquirer.returnRoleArray(pool);
+                let {role_name} = await employee_inquirer.chooseRoleForEmployee(employee_name, roleArray);
+                let {err} = await employee_inquirer.updateEmployeeRole(pool, findId(employee_name, employeeArray), findId(role_name, roleArray));
+                let {err2} = await employee_inquirer.selectAll(pool);
+
                 break;
             }
 
+
+
+
+
+
+            case 'update_employee_manager' : {
+                let {employee_id} = await employee_inquirer.select();
+                let {manager_id} = await manager_inquirer.select('manager_id');
+                let {err} = await employee_inquirer.update('employee_id', 'manager_id');
+                break;
+            }
             case 'view_employees_by_manager' : {
                 let {manager_id} = await manager_inquirer.select();
                 let {err} = await employee_inquirer.select('manager_id');
@@ -114,12 +135,6 @@ run = async () => {
             case 'view_employees_by_department' : {
                 let {department_id} = await department_inquirer.select();
                 let {err} = await employee_inquirer.select('department_id');
-                break;
-            }
-            case 'update_employee_manager' : {
-                let {employee_id} = await employee_inquirer.select();
-                let {manager_id} = await manager_inquirer.select('manager_id');
-                let {err} = await employee_inquirer.update('employee_id', 'manager_id');
                 break;
             }
             case 'delete_employee' : {
@@ -157,10 +172,24 @@ run().then(r => {
     tools.buildHTML(gTeam);
 });
 
-
-
-
-
+/**
+ * Returns the ID related to the selected userName in a binary array
+ * @param userName
+ * @param userArray
+ * @returns {number}
+ */
+function findId(userName, userArray) {
+    let user_id = 0;
+    userArray.every((element, index, array) => {
+        const {id, name} = element;
+        if (userName === name) {
+            user_id = id;
+            return false;
+        }
+        return true;
+    });
+    return user_id;
+}
 
 
 

@@ -41,11 +41,66 @@ module.exports = {
     },
     select_manager_list: () => {
         return `SELECT id, concat(first_name, " ", last_name) as name
-                FROM company_db.employee`;
+                FROM company_db.employee
+                where employee.id = employee.manager_id`;
 
     },
     select_role_list: () => {
         return `SELECT id, title as name
                 FROM company_db.role`;
     },
+    select_employee_list: () => {
+        return `SELECT id, concat(first_name, " ", last_name) as name
+                FROM company_db.employee`;
+    },
+    updateEmployeeRole: (employee_id, role_id) => {
+        return `Update company_db.employee set role_id=${role_id} where id =${employee_id}`;
+    },
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

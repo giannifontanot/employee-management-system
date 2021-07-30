@@ -32,4 +32,8 @@ FROM company_db.department;
 SELECT id, CONCAT("'",title,"'") as title
 FROM company_db.role
 order by id;
+# --------------------------------------------
+SELECT id, concat(first_name, " ", last_name) as name
+FROM company_db.employee
+where employee.id = employee.manager_id
 
