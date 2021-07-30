@@ -13,6 +13,7 @@ module.exports = {
                 choices: ['Add a department', 'Add a role', 'Add an employee', new inquirer.Separator(), 'View all departments', 'View all roles', 'View all employees', 'view_employees_by_department', 'view_employees_by_manager', new inquirer.Separator(), 'Update an employee role', 'update_employee_manager', new inquirer.Separator(), 'delete_role', 'delete_department', 'delete_employee', new inquirer.Separator(), 'budget_by_department', 'Quit'],
             },
         ];
+console.log(chalk.gray('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'));
         return inquirer.prompt(questions);
     },
 };
