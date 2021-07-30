@@ -95,9 +95,21 @@ module.exports = {
                 WHERE company_db.role.id = company_db.employee.role_id
                   AND company_db.role.id = ${role_id}`;
     },
+    existDepartmentInRole: (department_id) => {
+        return `SELECT company_db.department.id, company_db.department.name
+                FROM company_db.department,  company_db.role
+                WHERE company_db.department.id = company_db.role.department_id
+                  AND company_db.department.id = ${department_id}`;
+    },
+    deleteDepartment: (department_id) => {
+        return `DELETE
+                FROM company_db.department
+                WHERE id = ${department_id}`;
+    },
+
 
 }
-
+12
 
 
 

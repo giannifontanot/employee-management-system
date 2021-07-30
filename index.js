@@ -1,5 +1,6 @@
 const tools = require('./lib/screen-tools');
 const mysql2 = require('mysql2/promise');
+let gMessage = '';
 
 // Inquirer questions
 const employee_inquirer = require('./src/employee-inquirer');
@@ -36,7 +37,7 @@ run = async () => {
         });
 
         // What do you want to do?
-        const {option} = await main_menu_inquirer.getOption();
+        const {option} = await main_menu_inquirer.getOption(gMessage);
         switch (option) {
             case 'View all departments': {// !OK
                 let {err} = await department_inquirer.selectAll(pool);
@@ -119,7 +120,7 @@ run = async () => {
                 break;
             }
 
-            case 'delete_role' : { // !HERE
+            case 'delete_role' : { // !OK
                 let roleArray = await role_inquirer.returnRoleArray(pool);
                 let {role_name} = await role_inquirer.chooseRole(roleArray);
                 const  bResult  = await role_inquirer.existRoleInEmployee(pool, findId(role_name, roleArray));
@@ -134,6 +135,21 @@ run = async () => {
                 }
                 break;
             }
+
+            case 'delete_department' : { // !HERE
+                let departmentArray = await department_inquirer.returnDepartmentArray(pool);
+                let {department_name} = await department_inquirer.chooseDepartment(departmentArray);
+                const  bResult  = await department_inquirer.existDepartmentInRole(pool, findId(department_name, departmentArray));
+
+                if (bResult) {
+                    console.log(chalk.red("You cannot delete the department "+department_name+". There are many ROLES" +
+                        " with" +
+                        " that" +
+                        " department."));
+                }else{
+
+                    let { err } = await department_inquirer.deleteDepartment(pool, findId(department_name, departmentArray));
+                    console.table(err);
             // -----------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -146,10 +162,7 @@ run = async () => {
 
 
 
-
-            case 'delete_department' : {
-                let {department_id} = await department_inquirer.select();
-                let {err} = await department_inquirer.delete('department_id');
+                }
                 break;
             }
             case 'budget_by_department' : {

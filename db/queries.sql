@@ -54,12 +54,18 @@ select *
 from company_db.role;
 # --------------------- -----------------------
 SELECT *
-FROM company_db.role
+FROM company_db.role;
 # --------------------- -----------------------
 SELECT company_db.role.id, company_db.role.title
 FROM company_db.employee,  company_db.role
 WHERE company_db.role.id = company_db.employee.role_id
-  AND company_db.role.id = 4
+  AND company_db.role.id = 4;
+# --------------------- -----------------------
+SELECT company_db.department.id, company_db.department.name
+FROM company_db.department,  company_db.role
+WHERE company_db.department.id = company_db.role.department_id
+  AND company_db.department.id = 1
+# --------------------- ----------------------
 
 
 
