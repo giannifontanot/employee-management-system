@@ -53,24 +53,13 @@ order by role_id, manager_id;
 select *
 from company_db.role;
 # --------------------- -----------------------
-
-
-`
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+SELECT *
+FROM company_db.role
+# --------------------- -----------------------
+SELECT company_db.role.id, company_db.role.title
+FROM company_db.employee,  company_db.role
+WHERE company_db.role.id = company_db.employee.role_id
+  AND company_db.role.id = 4
 
 
 

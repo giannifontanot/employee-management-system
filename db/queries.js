@@ -64,9 +64,14 @@ module.exports = {
                 WHERE id = ${employee_id}`;
     },
     deleteEmployee: (employee_id) => {
-        return `DELETE company_db.employee
+        return `DELETE
                 FROM company_db.employee
                 WHERE id = ${employee_id}`;
+    },
+    deleteRole: (role_id) => {
+        return `DELETE
+                FROM company_db.role
+                WHERE id = ${role_id}`;
     },
     viewEmployeesByManager: (manager_id) => {
         return `SELECT id, concat(first_name, " ", last_name) as name
@@ -74,7 +79,9 @@ module.exports = {
                 WHERE employee.manager_id = ${manager_id}`;
     },
     viewEmployeesByDepartment: (department_id) => {
-        return `SELECT employee.id, concat(employee.first_name, " ", employee.last_name) as name, department.name as department
+        return `SELECT employee.id,
+                       concat(employee.first_name, " ", employee.last_name) as name,
+                       department.name                                      as department
                 FROM company_db.employee,
                      company_db.role,
                      company_db.department
@@ -82,7 +89,14 @@ module.exports = {
                   AND company_db.role.department_id = company_db.department.id
                   AND role.department_id = ${department_id}`;
     },
-};
+    existRoleInEmployee: (role_id) => {
+        return `SELECT company_db.role.id
+                 FROM company_db.employee,  company_db.role
+                WHERE company_db.role.id = company_db.employee.role_id
+                  AND company_db.role.id = ${role_id}`;
+    },
+
+}
 
 
 

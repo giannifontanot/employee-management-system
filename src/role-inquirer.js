@@ -31,6 +31,43 @@ module.exports = {
         ];
         return inquirer.prompt(questions);
     },
+    chooseRole: async (roleArray) => {
+        const questions = [
+            {
+                name: 'role_name',
+                type: 'list',
+                pageSize: 20,
+                loop: true,
+                message: chalk.yellow('Please select a ROLE from the list:'),
+                choices: roleArray,
+            },
+        ];
+        return await inquirer.prompt(questions);
+    },
+    existRoleInEmployee: async (pool, role_id) => {
+        try {
+            let result = await pool.execute(queries.existRoleInEmployee(role_id));
+
+            if (result[0].length > 0) {
+                return true;
+            }else{
+                return false;
+            }
+
+        } catch (error) {
+            console.log("error: " + error);
+        }
+    },
+    deleteRole: async (pool, role_id) => {
+        try {
+//--------------------------------------------------------------------------------------------------------------------------
+            //result:[{"fieldCount":0,"affectedRows":1,"insertId":0,"info":"","serverStatus":2,"warningStatus":0},null]
+//--------------------------------------------------------------------------------------------------------------------------
+            return await pool.execute(queries.deleteRole(role_id));
+        } catch (error) {
+            console.log("error: " + error);
+        }
+    },
     selectAll: async (pool) => {
         const [rows, fields] = await pool.execute(queries.select_role_all());
         console.table(rows);
@@ -41,7 +78,7 @@ module.exports = {
         return await pool.execute(queries.insert_new_role(title, salary, department_id));
     },
     returnRoleArray: async (pool) => {
-        const [ rows , fields] = await pool.execute(queries.select_role_list());
+        const [rows, fields] = await pool.execute(queries.select_role_list());
 
         return rows;
 

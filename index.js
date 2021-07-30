@@ -13,6 +13,7 @@ const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const manager_inquirer = require("./src/manager-inquirer");
+const chalk = require("chalk");
 
 // Create a pool of DB connections
 
@@ -111,10 +112,26 @@ run = async () => {
                 break;
             }
 
-            case 'delete_employee' : { // !HERE
+            case 'delete_employee' : { // !OK
                 let employeeArray = await employee_inquirer.returnEmployeeArray(pool);
                 let {employee_name} = await employee_inquirer.chooseEmployee(employeeArray);
                 let {err} = await employee_inquirer.deleteEmployee(pool, findId(employee_name, employeeArray));
+                break;
+            }
+
+            case 'delete_role' : { // !HERE
+                let roleArray = await role_inquirer.returnRoleArray(pool);
+                let {role_name} = await role_inquirer.chooseRole(roleArray);
+                const  bResult  = await role_inquirer.existRoleInEmployee(pool, findId(role_name, roleArray));
+
+                if (bResult) {
+                 console.log(chalk.red("You cannot delete the role "+role_name+". There are many EMPLOYEES with that" +
+                     " role."));
+               }else{
+
+                let { err } = await role_inquirer.deleteRole(pool, findId(role_name, roleArray));
+                console.table(err);
+                }
                 break;
             }
             // -----------------------------------------------------------------------------------------------------------------------------------
@@ -130,12 +147,6 @@ run = async () => {
 
 
 
-
-            case 'delete_role' : {
-                let {role_id} = await role_inquirer.select();
-                let {err} = await role_inquirer.delete('role_id');
-                break;
-            }
             case 'delete_department' : {
                 let {department_id} = await department_inquirer.select();
                 let {err} = await department_inquirer.delete('department_id');
