@@ -104,10 +104,17 @@ run = async () => {
                 break;
 
             }
-            case 'view_employees_by_department' : { // !HERE
+            case 'view_employees_by_department' : { // !OK
                 let departmentArray = await department_inquirer.returnDepartmentArray(pool);
                 let {department_name} = await department_inquirer.chooseDepartment(departmentArray);
                 let {err} = await employee_inquirer.viewEmployeesByDepartment(pool,findId(department_name, departmentArray));
+                break;
+            }
+
+            case 'delete_employee' : { // !HERE
+                let employeeArray = await employee_inquirer.returnEmployeeArray(pool);
+                let {employee_name} = await employee_inquirer.chooseEmployee(employeeArray);
+                let {err} = await employee_inquirer.deleteEmployee(pool, findId(employee_name, employeeArray));
                 break;
             }
             // -----------------------------------------------------------------------------------------------------------------------------------
@@ -123,12 +130,6 @@ run = async () => {
 
 
 
-
-            case 'delete_employee' : {
-                let {employee_id} = await employee_inquirer.select();
-                let {err} = await employee_inquirer.delete('employee_id');
-                break;
-            }
 
             case 'delete_role' : {
                 let {role_id} = await role_inquirer.select();

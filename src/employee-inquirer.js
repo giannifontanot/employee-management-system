@@ -54,6 +54,7 @@ module.exports = {
         ];
         return await inquirer.prompt(questions);
     },
+
     chooseRoleForEmployee: async (employee_name, roleArray) => {
         const questions = [
             {
@@ -101,6 +102,9 @@ module.exports = {
     },
     updateEmployeeManager: async (pool, employee_id, manager_id) => {
         return await pool.execute(queries.updateEmployeeManager(employee_id, manager_id));
+    },
+    deleteEmployee: async (pool, employee_id) => {
+        return await pool.execute(queries.deleteEmployee(employee_id));
     },
     selectAll: async (pool) => {
         const [rows, fields] = await pool.execute(queries.select_employee_all());
