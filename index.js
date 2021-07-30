@@ -58,16 +58,7 @@ run = async () => {
                 let department_id = 0;
                 let departmentArray = await department_inquirer.returnDepartmentArray(pool);
                 let {title, salary, department_name} = await role_inquirer.fillData(departmentArray);
-                departmentArray.every((element, index, array) => {
-                    const {id, name} = element;
-                    if (department_name === name) {
-                        department_id = id;
-                        return false;
-                    }
-                    return true;
-                });
-
-                let {err} = await role_inquirer.insertNewRole(pool, title, salary, department_id);
+                let {err} = await role_inquirer.insertNewRole(pool, title, salary, findId(department_name, departmentArray));
                 break;
             }
             case 'Add an employee': { // !OK
@@ -82,29 +73,10 @@ run = async () => {
                     manager_name
                 } = await employee_inquirer.fillData(roleArray, managerArray);
 
-                roleArray.every((element, index, array) => {
-                    const {id, name} = element;
-                    if (role_name === name) {
-                        role_id = id;
-                        return false;
-                    }
-                    return true;
-                });
-
-                managerArray.every((element, index, array) => {
-                    const {id, name} = element;
-                    if (manager_name === name) {
-                        manager_id = id;
-                        return false;
-                    }
-                    return true;
-                });
-
-                let {err} = await employee_inquirer.insertNewEmployee(pool, first_name, last_name, role_id, manager_id);
+                let {err} = await employee_inquirer.insertNewEmployee(pool, first_name, last_name, findId(role_name, roleArray), findId(manager_name, managerArray));
                 break;
             }
-            // -----------------------------------------------------------------------------------------------------------------------------------
-            case 'Update an employee role': { // !HERE
+            case 'Update an employee role': { // !OK
                 let employeeArray = await employee_inquirer.returnEmployeeArray(pool);
                 let {employee_name} = await employee_inquirer.chooseEmployee(employeeArray);
                 let employee_id = findId(undefined, employeeArray);
@@ -112,21 +84,31 @@ run = async () => {
                 let {role_name} = await employee_inquirer.chooseRoleForEmployee(employee_name, roleArray);
                 let {err} = await employee_inquirer.updateEmployeeRole(pool, findId(employee_name, employeeArray), findId(role_name, roleArray));
                 let {err2} = await employee_inquirer.selectAll(pool);
-
                 break;
             }
-
-
-
-
-
-
-            case 'update_employee_manager' : {
-                let {employee_id} = await employee_inquirer.select();
-                let {manager_id} = await manager_inquirer.select('manager_id');
-                let {err} = await employee_inquirer.update('employee_id', 'manager_id');
+            case 'update_employee_manager' : { // !OK
+                let employeeArray = await employee_inquirer.returnEmployeeArray(pool);
+                let {employee_name} = await employee_inquirer.chooseEmployee(employeeArray);
+                let employee_id = findId(undefined, employeeArray);
+                let managerArray = await employee_inquirer.returnManagerArray(pool);
+                let {manager_name} = await employee_inquirer.chooseManagerForEmployee(employee_name, managerArray);
+                let {err} = await employee_inquirer.updateEmployeeManager(pool, findId(employee_name, employeeArray), findId(manager_name, managerArray));
+                let {err2} = await employee_inquirer.selectAll(pool);
                 break;
             }
+            // -----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
             case 'view_employees_by_manager' : {
                 let {manager_id} = await manager_inquirer.select();
                 let {err} = await employee_inquirer.select('manager_id');

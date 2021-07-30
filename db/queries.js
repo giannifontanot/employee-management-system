@@ -54,7 +54,14 @@ module.exports = {
                 FROM company_db.employee`;
     },
     updateEmployeeRole: (employee_id, role_id) => {
-        return `Update company_db.employee set role_id=${role_id} where id =${employee_id}`;
+        return `UPDATE company_db.employee
+                SET role_id=${role_id}
+                WHERE id = ${employee_id}`;
+    },
+    updateEmployeeManager: (employee_id, manager_id) => {
+        return `UPDATE company_db.employee
+                SET manager_id=${manager_id}
+                WHERE id = ${employee_id}`;
     },
 };
 

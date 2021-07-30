@@ -61,8 +61,22 @@ module.exports = {
                 type: 'list',
                 pageSize: 20,
                 loop: true,
-                message: chalk.bgGray(employee_name) + chalk.yellow('Please select a ROLE from the list:'),
+                message:  chalk.yellow('Please select a ROLE from the list for '+chalk.bgGray(employee_name)+":"),
                 choices: roleArray,
+            },
+
+        ];
+        return await inquirer.prompt(questions);
+    },
+    chooseManagerForEmployee: async (employee_name, managerArray) => {
+        const questions = [
+            {
+                name: 'manager_name',
+                type: 'list',
+                pageSize: 20,
+                loop: true,
+                message: chalk.yellow('Please select a MANAGER from the list for '+chalk.bgGray(employee_name)+":"),
+                choices: managerArray,
             },
 
         ];
@@ -70,6 +84,9 @@ module.exports = {
     },
     updateEmployeeRole: async (pool, employee_id, role_id) => {
         return await pool.execute(queries.updateEmployeeRole(employee_id, role_id));
+    },
+    updateEmployeeManager: async (pool, employee_id, manager_id) => {
+        return await pool.execute(queries.updateEmployeeManager(employee_id, manager_id));
     },
     selectAll: async (pool) => {
         const [rows, fields] = await pool.execute(queries.select_employee_all());
