@@ -29,11 +29,69 @@ values ('Manufacturing Engineer', 100000, 1);
 SELECT id, name
 FROM company_db.department;
 # --------------------------------------------
-SELECT id, CONCAT("'",title,"'") as title
+SELECT id, CONCAT("'", title, "'") as title
 FROM company_db.role
 order by id;
 # --------------------------------------------
 SELECT id, concat(first_name, " ", last_name) as name
 FROM company_db.employee
 where employee.id = employee.manager_id
+# --------------------------------------------
+SELECT employee.id, concat(employee.first_name, " ", employee.last_name) as name, department.name
+FROM company_db.employee,
+     company_db.role,
+     company_db.department
+
+     WHERE company_db.employee.role_id = company_db.role.id
+    AND company_db.role.department_id = company_db.department.id
+  AND role.department_id = 3
+# --------------------- -----------------------
+select *
+from company_db.employee
+order by role_id, manager_id;
+# --------------------- -----------------------
+select *
+from company_db.role;
+# --------------------- -----------------------
+
+
+`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

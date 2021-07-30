@@ -20,22 +20,32 @@ module.exports = {
         ];
         return inquirer.prompt(questions);
     },
+    chooseDepartment: async (departmentArray) => {
+        const questions = [
+            {
+                name: 'department_name',
+                type: 'list',
+                pageSize: 20,
+                loop: true,
+                message: chalk.yellow('Please select a DEPARTMENT from the list:'),
+                choices: departmentArray,
+            },
+        ];
+        return await inquirer.prompt(questions);
+    },
     selectAll: async (pool) => {
         const [rows, fields] = await pool.execute(queries.select_department_all());
         return '';
 
     },
     returnDepartmentArray: async (pool) => {
-        const [ rows , fields] = await pool.execute(queries.select_department_all());
+        const [rows, fields] = await pool.execute(queries.select_department_all());
         return rows;
 
     },
     insertNewDepartment: async (pool, department) => {
         const [rows, fields] = await pool.execute(queries.insert_new_department(department));
         return '';
-    },
-    method3: () => {
-
     },
     checkValidateGitHubResponse: (name) => {
         return validateNewDepartment(name);

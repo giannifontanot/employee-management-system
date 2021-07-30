@@ -126,6 +126,11 @@ module.exports = {
         console.table(rows);
         return '';
     },
+    viewEmployeesByDepartment: async (pool, department_id) => {
+        const [ rows , fields] = await pool.execute(queries.viewEmployeesByDepartment(department_id));
+        console.table(rows);
+        return '';
+    },
 };
 
 

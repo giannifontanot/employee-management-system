@@ -68,7 +68,15 @@ module.exports = {
                 FROM company_db.employee
                 WHERE employee.manager_id = ${manager_id}`;
     },
-
+    viewEmployeesByDepartment: (department_id) => {
+        return `SELECT employee.id, concat(employee.first_name, " ", employee.last_name) as name, department.name as department
+                FROM company_db.employee,
+                     company_db.role,
+                     company_db.department
+                WHERE company_db.employee.role_id = company_db.role.id
+                  AND company_db.role.department_id = company_db.department.id
+                  AND role.department_id = ${department_id}`;
+    },
 };
 
 
