@@ -6,7 +6,7 @@ module.exports = {
         const questions = [
             {
                 name: 'option',
-                type: 'list',
+                type: 'rawlist',
                 message: chalk.yellow('What do you want to do?'),
                 loop: false,
                 pageSize: 20,

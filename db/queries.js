@@ -63,6 +63,12 @@ module.exports = {
                 SET manager_id=${manager_id}
                 WHERE id = ${employee_id}`;
     },
+    viewEmployeesByManager: (manager_id) => {
+        return `SELECT id, concat(first_name, " ", last_name) as name
+                FROM company_db.employee
+                WHERE employee.manager_id = ${manager_id}`;
+    },
+
 };
 
 

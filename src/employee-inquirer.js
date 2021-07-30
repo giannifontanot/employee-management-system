@@ -82,6 +82,20 @@ module.exports = {
         ];
         return await inquirer.prompt(questions);
     },
+    chooseManager: async (managerArray) => {
+        const questions = [
+            {
+                name: 'manager_name',
+                type: 'list',
+                pageSize: 20,
+                loop: true,
+                message: chalk.yellow('Please select a MANAGER from the list:'),
+                choices: managerArray,
+            },
+
+        ];
+        return await inquirer.prompt(questions);
+    },
     updateEmployeeRole: async (pool, employee_id, role_id) => {
         return await pool.execute(queries.updateEmployeeRole(employee_id, role_id));
     },
@@ -90,7 +104,6 @@ module.exports = {
     },
     selectAll: async (pool) => {
         const [rows, fields] = await pool.execute(queries.select_employee_all());
-
         console.table(rows);
         return '';
 
@@ -107,6 +120,11 @@ module.exports = {
     returnEmployeeArray: async (pool) => {
         const [ rows , fields] = await pool.execute(queries.select_employee_list());
         return rows;
+    },
+    viewEmployeesByManager: async (pool, manager_id) => {
+        const [ rows , fields] = await pool.execute(queries.viewEmployeesByManager(manager_id));
+        console.table(rows);
+        return '';
     },
 };
 

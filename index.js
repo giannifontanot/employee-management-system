@@ -96,6 +96,12 @@ run = async () => {
                 let {err2} = await employee_inquirer.selectAll(pool);
                 break;
             }
+
+            case 'view_employees_by_manager' : { // !HERE
+                let managerArray = await employee_inquirer.returnManagerArray(pool);
+                let {manager_name} = await employee_inquirer.chooseManager(managerArray);
+                let {err} = await employee_inquirer.viewEmployeesByManager(pool,findId(manager_name, managerArray));
+                break;
             // -----------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -109,10 +115,8 @@ run = async () => {
 
 
 
-            case 'view_employees_by_manager' : {
-                let {manager_id} = await manager_inquirer.select();
-                let {err} = await employee_inquirer.select('manager_id');
-                break;
+
+
             }
             case 'view_employees_by_department' : {
                 let {department_id} = await department_inquirer.select();
