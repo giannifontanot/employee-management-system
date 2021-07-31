@@ -4,7 +4,7 @@
 # Employee Management System
 This application helps a small business owner to organize the departments, roles, and employees in the company.
 ## Table of Contents
-- [Employee Management System](#Employee Management System)
+- Employee Management System
 	* [Installation](#installation)
 	* [Usage](#usage)
 	* [Credits](#credits)
