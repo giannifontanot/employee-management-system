@@ -1,16 +1,20 @@
 insert into company_db.department (name) # 1
-values('Production');
+values('None');
 insert into company_db.department (name) # 2
-values('Sales');
+values('Production');
 insert into company_db.department (name) # 3
-values('R&D');
+values('Sales');
 insert into company_db.department (name) # 4
-values('HR');
+values('R&D');
 insert into company_db.department (name) # 5
-values('Finance');
+values('HR');
 insert into company_db.department (name) # 6
+values('Finance');
+insert into company_db.department (name) # 7
 values('Marketing');
 # ................................................................
+insert into company_db.role (title, salary, department_id)
+values('None', 0,1);
 insert into company_db.role (title, salary, department_id)
 values('Production Manager', 200000,1);
 insert into company_db.role (title, salary, department_id)

@@ -25,8 +25,10 @@ This application helps a small business owner to organize the departments, roles
        - chalk
        - inquirer
         
- All this packages are found in NPM.
+ All this packages are found in NPM. Following you find an image of the DB tables. To create this sctructure, you 
+ might want to use /db/schema.sql and /db/seeds/sql.
 `````
+ ![db-structure.png](db-structure.png)
 ## Usage
 Use this application to store your employee roster, check the budget per department, and add, delete, or update your information.
 
