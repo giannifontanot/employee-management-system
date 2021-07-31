@@ -1,10 +1,10 @@
 module.exports = {
-    select_role_all: () => {
-        return `SELECT company_db.role.id         as Role_Id,
-                       company_db.role.title      as Role,
-                       company_db.department.name as Department,
+    return_role_table: () => {
+        return `SELECT company_db.role.id         as ID,
+                       company_db.role.title      as ROLE,
+                       company_db.department.name as DEPARTMENT,
                        company_db
-                           .role.salary           as Salary
+                           .role.salary           as SALARY
                 FROM company_db.role,
                      company_db.department
                 where company_db.role.department_id = company_db.department.id`;
@@ -13,16 +13,19 @@ module.exports = {
         return `SELECT id, name
                 FROM company_db.department`;
     },
-    select_employee_all: () => {
-        return `SELECT employeeTable.id                                               as Employee_Id,
-                       CONCAT(employeeTable.first_name, " ", employeeTable.last_name) as Employee,
-                       role.title                                                     as Role,
-                       CONCAT(managerTable.first_name, " ", managerTable.last_name)   as Manager
+    return_department_table: () => {
+        return `SELECT id as ID, name as DEPARTMENT
+                FROM company_db.department`;
+    },
+    return_employee_table: () => {
+        return `SELECT employeeTable.id                                               as ID,
+                       CONCAT(employeeTable.first_name, " ", employeeTable.last_name) as EMPLOYEE,
+                       role.title                                                     as ROLE,
+                       CONCAT(managerTable.first_name, " ", managerTable.last_name)   as MANAGER
                 from company_db.employee as employeeTable,
                      company_db.role,
                      company_db.employee as managerTable
                 where employeeTable.role_id = role.id
-
                   and managerTable.id = employeeTable.manager_id`;
     },
     insert_new_department: (department) => {

@@ -71,7 +71,7 @@ module.exports = {
         }
     },
     selectAll: async (pool) => {
-        const [rows, fields] = await pool.execute(queries.select_role_all());
+        const [rows, fields] = await pool.execute(queries.return_role_table());
         console.table(rows);
         return '';
 
