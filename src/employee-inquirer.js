@@ -6,8 +6,12 @@ const chalk = require("chalk");
 
 module.exports = {
 
-    fillData: async (roleArray, managerArray) => {
-        const questions = [
+    fillData: async ( roleArray ,  managerArray ) => {
+         console.log("roleArray: " + JSON.stringify(roleArray));
+         console.log("managerArray: " + JSON.stringify(managerArray));
+
+
+         const questions = [
             {
                 name: 'first_name',
                 type: 'input',
@@ -21,7 +25,7 @@ module.exports = {
                 // validate: validateSchoolResponse,
             },
             {
-                name: 'title',
+                name: 'role_name',
                 type: 'list',
                 pageSize: 20,
                 loop: false,
@@ -118,7 +122,7 @@ module.exports = {
 
     },
     insertNewEmployee: async (pool, first_name, last_name, role_id, manager_id) => {
-        const [rows, fields] = await pool.execute(queries.insert_new_employee(first_name, last_name, role_id, manager_id));
+        const [rows, fields] = await pool.execute(queries.insert_new_employee(   first_name  ,  last_name ,  role_id ,  manager_id ));
         return '';
     },
     returnEmployeeArray: async (pool) => {

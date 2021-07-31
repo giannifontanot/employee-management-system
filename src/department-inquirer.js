@@ -55,6 +55,7 @@ module.exports = {
     },
     selectAll: async (pool) => {
         const [rows, fields] = await pool.execute(queries.select_department_all());
+        console.table(rows);
         return '';
 
     },
