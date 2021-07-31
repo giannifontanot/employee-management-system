@@ -10,7 +10,6 @@ This application helps a small business owner to organize the departments, roles
 	* [Credits](#credits)
 	* [Features](#features)
 	* [Contributions](#contributions)
-	* [GitHub Repository](#github-repository)
 - [🔗 Links](#---links)
 	+ [GitHub Repository](#github-repository)
 	+ [Live Link](#live-link)
