@@ -17,7 +17,16 @@ This application helps a small business owner to organize the departments, roles
 	+ [Support](#support)
 	+ [Authors](#authors)
 ## Installation
-The heart of this project is NodeJS, and along with it you will need mysql2, console.table, chalk, and inquirer. All this packages are found in NPM.
+`````
+ The heart of this project is NodeJS. Along with it you will need:
+ 
+       - mysql2
+       - console.table
+       - chalk
+       - inquirer
+        
+ All this packages are found in NPM.
+`````
 ## Usage
 Use this application to store your employee roster, check the budget per department, and add, delete, or update your information.
 
@@ -36,12 +45,18 @@ Many tutorial and tools were used:
 
 
 
-## Features
+## Current Features
 ````````````````````````
 - You can add departments, roles, and employees to the application
 - It allows you to view your list of employees by manager or by department
 - If you want to update the information the application will give you the option to do it
 - As a bonus the application presents the budget by department
+````````````````````````
+
+## Future Improvements
+````````````````````````
+- Jest testing needs to be implemented
+- Check for better validations in ONLY NUMBERS
 ````````````````````````
 ## Contributions
 If you would like to contribute to this project , you are very welcome! You can fork it and later submit a pull request. 
