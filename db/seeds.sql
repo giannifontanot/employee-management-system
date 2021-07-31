@@ -12,30 +12,30 @@ insert into company_db.department (name) # 6
 values('Marketing');
 # ................................................................
 insert into company_db.role (title, salary, department_id)
-values('Production Manager', 100000,1);
+values('Production Manager', 200000,1);
 insert into company_db.role (title, salary, department_id)
-values('Sales Manager', 100000,2);
+values('Sales Manager', 220000,2);
 insert into company_db.role (title, salary, department_id)
-values('R&D Manager', 100000,3);
+values('R&D Manager', 250000,3);
 insert into company_db.role (title, salary, department_id)
-values('HR Manager', 100000,4);
+values('HR Manager', 200000,4);
 insert into company_db.role (title, salary, department_id)
-values('Finance Manager', 100000,5);
+values('Finance Manager', 220000,5);
 insert into company_db.role (title, salary, department_id)
-values('Marketing Manager', 100000,6);
+values('Marketing Manager', 210000,6);
 # ................................................................
 insert into company_db.role (title, salary, department_id)
-values('Manufacturing Engineer', 100000,1);
+values('Manufacturing Engineer', 120000,1);
 insert into company_db.role (title, salary, department_id)
-values('Sales Representative', 100000,2);
+values('Sales Representative', 80000,2);
 insert into company_db.role (title, salary, department_id)
-values('R&D Engineer', 100000,3);
+values('R&D Engineer', 120000,3);
 insert into company_db.role (title, salary, department_id)
 values('HR Coordinator', 100000,4);
 insert into company_db.role (title, salary, department_id)
-values('Accountant', 100000,5);
+values('Accountant', 80000,5);
 insert into company_db.role (title, salary, department_id)
-values('Marketing Analyst', 100000,6);
+values('Marketing Analyst', 650000,6);
 # ................................................................
 
 insert into company_db.employee (first_name, last_name, role_id, manager_id)
