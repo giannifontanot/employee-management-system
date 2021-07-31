@@ -33,15 +33,15 @@ run = async () => {
         const {option} = await main_menu_inquirer.getOption();
         switch (option) {
             case 'View all departments': {// !OK
-                let {err} = await department_inquirer.selectAll(pool);
+                let {err} = await department_inquirer.returnDepartmentTable(pool);
                 break;
             }
             case 'View all roles': {// !OK
-                let {err} = await role_inquirer.selectAll(pool);
+                let {err} = await role_inquirer.returnRoleTable(pool);
                 break;
             }
             case 'View all employees': {// !OK
-                let {err} = await employee_inquirer.selectAll(pool);
+                let {err} = await employee_inquirer.returnEmployeeTable(pool);
                 break;
             }
             case 'Add a department': {// !OK

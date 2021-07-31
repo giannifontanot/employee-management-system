@@ -70,7 +70,7 @@ module.exports = {
             console.log("error: " + error);
         }
     },
-    selectAll: async (pool) => {
+    returnRoleTable: async (pool) => {
         const [rows, fields] = await pool.execute(queries.return_role_table());
         console.table(rows);
         return '';

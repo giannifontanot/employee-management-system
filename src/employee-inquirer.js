@@ -8,8 +8,6 @@ const chalk = require("chalk");
 module.exports = {
 
     fillData: async ( roleArray ,  managerArray ) => {
-         console.log("roleArray: " + JSON.stringify(roleArray));
-         console.log("managerArray: " + JSON.stringify(managerArray));
 
 
          const questions = [
@@ -111,8 +109,8 @@ module.exports = {
     deleteEmployee: async (pool, employee_id) => {
         return await pool.execute(queries.deleteEmployee(employee_id));
     },
-    selectAll: async (pool) => {
-        const [rows, fields] = await pool.execute(queries.select_employee_all());
+    returnEmployeeTable: async (pool) => {
+        const [rows, fields] = await pool.execute(queries.return_employee_table());
         console.table(rows);
         return '';
 

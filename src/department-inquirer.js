@@ -53,8 +53,8 @@ module.exports = {
             console.log("error: " + error);
         }
     },
-    selectAll: async (pool) => {
-        const [rows, fields] = await pool.execute(queries.select_department_all());
+    returnDepartmentTable: async (pool) => {
+        const [rows, fields] = await pool.execute(queries.return_department_table());
         console.table(rows);
         return '';
 
