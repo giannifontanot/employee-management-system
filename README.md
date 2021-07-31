@@ -57,8 +57,8 @@ Many tutorial and tools were used:
 
 ## Future Improvements
 ````````````````````````
-- Jest testing needs to be implemented
-- Check for better validations in ONLY NUMBERS
+- Implementation of Jest Testing
+- Better validations in ONLY NUMBERS
 ````````````````````````
 ## Contributions
 If you would like to contribute to this project , you are very welcome! You can fork it and later submit a pull request. 
