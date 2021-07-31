@@ -82,39 +82,39 @@ run = async () => {
                 let {err2} = await employee_inquirer.returnEmployeeTable(pool);
                 break;
             }
-            case 'update_employee_manager' : { // !OK
+            case 'Update employee manager' : { // !OK
                 let employeeArray = await employee_inquirer.returnEmployeeArray(pool);
                 let {employee_name} = await employee_inquirer.chooseEmployee(employeeArray);
                 let employee_id = tools.findId(undefined, employeeArray);
                 let managerArray = await employee_inquirer.returnManagerArray(pool);
                 let {manager_name} = await employee_inquirer.chooseManagerForEmployee(employee_name, managerArray);
                 let {err} = await employee_inquirer.updateEmployeeManager(pool, tools.findId(employee_name, employeeArray), tools.findId(manager_name, managerArray));
-                let {err2} = await employee_inquirer.selectAll(pool);
+                let {err2} = await employee_inquirer.returnEmployeeTable(pool);
                 break;
             }
 
-            case 'view_employees_by_manager' : { // !OK
+            case 'View employees by manager' : { // !OK
                 let managerArray = await employee_inquirer.returnManagerArray(pool);
                 let {manager_name} = await employee_inquirer.chooseManager(managerArray);
                 let {err} = await employee_inquirer.viewEmployeesByManager(pool, tools.findId(manager_name, managerArray));
                 break;
 
             }
-            case 'view_employees_by_department' : { // !OK
+            case 'View employees by department' : { // !OK
                 let departmentArray = await department_inquirer.returnDepartmentArray(pool);
                 let {department_name} = await department_inquirer.chooseDepartment(departmentArray);
                 let {err} = await employee_inquirer.viewEmployeesByDepartment(pool, tools.findId(department_name, departmentArray));
                 break;
             }
 
-            case 'delete_employee' : { // !OK
+            case 'Delete employee' : { // !OK
                 let employeeArray = await employee_inquirer.returnEmployeeArray(pool);
                 let {employee_name} = await employee_inquirer.chooseEmployee(employeeArray);
                 let {err} = await employee_inquirer.deleteEmployee(pool, tools.findId(employee_name, employeeArray));
                 break;
             }
 
-            case 'delete_role' : { // !OK
+            case 'Delete role' : { // !OK
                 let roleArray = await role_inquirer.returnRoleArray(pool);
                 let {role_name} = await role_inquirer.chooseRole(roleArray);
                 const bResult = await role_inquirer.existRoleInEmployee(pool, tools.findId(role_name, roleArray));
@@ -130,7 +130,7 @@ run = async () => {
                 break;
             }
 
-            case 'delete_department' : { // !HERE
+            case 'Delete department' : { // !HERE
                 let departmentArray = await department_inquirer.returnDepartmentArray(pool);
                 let {department_name} = await department_inquirer.chooseDepartment(departmentArray);
                 const bResult = await department_inquirer.existDepartmentInRole(pool, tools.findId(department_name, departmentArray));
@@ -150,7 +150,7 @@ run = async () => {
                 }
                 break;
             }
-            case 'budget_by_department' : {
+            case 'Budget by department' : {
                 let departmentArray = await department_inquirer.returnDepartmentArray(pool);
                 let {department_name} = await department_inquirer.chooseDepartment(departmentArray);
                 let budget = await role_inquirer.getBudget(pool, tools.findId(department_name, departmentArray));

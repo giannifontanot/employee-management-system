@@ -48,6 +48,12 @@ module.exports = {
                 where employee.id = employee.manager_id`;
 
     },
+    select_manager_all: () => {
+        return `SELECT id, concat(first_name, " ", last_name) as name
+                FROM company_db.employee
+                where employee.id = employee.manager_id`;
+
+    },
     select_role_list: () => {
         return `SELECT id, title as name
                 FROM company_db.role`;

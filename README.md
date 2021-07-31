@@ -7,6 +7,7 @@ This application helps a small business owner to organize the departments, roles
 - Employee Management System
 	* [Installation](#installation)
 	* [Usage](#usage)
+	* [==> Video <==](#video)
 	* [Credits](#credits)
 	* [Features](#features)
 	* [Contributions](#contributions)
@@ -29,7 +30,10 @@ This application helps a small business owner to organize the departments, roles
 `````
  ![db-structure.png](db-structure.png)
 ## Usage
+
 Use this application to store your employee roster, check the budget per department, and add, delete, or update your information.
+## Video
+Please click the blue link to watch this [VIDEO](https://drive.google.com/file/d/1xKKxTIJ6o_YNGE_HKW1YnDPepKRvR4NS/view)
 
 ![employee-management-system.gif](employee-management-system.gif)
 ## Credits
