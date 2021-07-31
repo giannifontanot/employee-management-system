@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const chalk = require("chalk");
-const tools = require("../lib/screen-tools");
+const tools = require("../lib/tools");
 
 module.exports = {
     getOption: (gMessage) => {
