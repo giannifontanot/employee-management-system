@@ -1,7 +1,9 @@
 const inquirer = require('inquirer');
+const validations = require('validations');
 const console_table = require('console.table');
 const queries = require("../../12-MySQL-Employee-Management-System/db/queries");
 const chalk = require("chalk");
+
 
 module.exports = {
     /**
@@ -14,7 +16,7 @@ module.exports = {
                 name: 'department',
                 type: 'input',
                 message: chalk.yellow('Enter the name of the new department:'),
-                validate: validateNewDepartment,
+                validate: validations.inputLettersOnly,
             },
 
         ];
@@ -36,9 +38,7 @@ module.exports = {
     existDepartmentInRole: async (pool, department_id) =>{
         try {
             let result = await pool.execute(queries.existDepartmentInRole(department_id));
-
             return result[0].length > 0;
-
         } catch (error) {
             console.log("error: " + error);
         }
@@ -68,23 +68,5 @@ module.exports = {
         const [rows, fields] = await pool.execute(queries.insert_new_department(department));
         return '';
     },
-    checkValidateGitHubResponse: (name) => {
-        return validateNewDepartment(name);
-    },
 
-}
-;
-
-const validateNewDepartment = name => {
-    //validate null or undefined
-    const message = "Please enter a valid department name. ";
-    if (name == null) {
-        return message + "Your input cannot be null.";
-    }
-    //validate blank string
-    if (!name.length) {
-        return message + "Your input cannot be empty.";
-    }
-    //valid name
-    return true;
 };

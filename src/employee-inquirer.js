@@ -1,5 +1,6 @@
 
 const inquirer = require('inquirer');
+const validations = require('validations');
 const console_table = require('console.table');
 const queries = require('../../12-MySQL-Employee-Management-System/db/queries');
 const chalk = require("chalk");
@@ -16,13 +17,13 @@ module.exports = {
                 name: 'first_name',
                 type: 'input',
                 message: chalk.yellow('Enter the first name:'),
-                // validate: validateSchoolResponse,
+                validate: validations.inputLettersOnly,
             },
             {
                 name: 'last_name',
                 type: 'input',
                 message: chalk.yellow('Enter the last name:'),
-                // validate: validateSchoolResponse,
+                validate: validations.inputLettersOnly,
             },
             {
                 name: 'role_name',
@@ -140,6 +141,8 @@ module.exports = {
         return '';
     },
 };
+
+
 
 
 

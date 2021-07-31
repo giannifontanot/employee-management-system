@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const console_table = require('console.table');
+const validations = require('validations');
 const queries = require('../../12-MySQL-Employee-Management-System/db/queries');
 const chalk = require("chalk");
 
@@ -11,13 +12,13 @@ module.exports = {
                 name: 'title',
                 type: 'input',
                 message: chalk.yellow("Enter the ROLE NAME:"),
-                // validate: validateSchoolResponse,
+                validate: validations.inputLettersOnly,
             },
             {
                 name: 'salary',
                 type: 'input',
                 message: chalk.yellow("Enter a SALARY:"),
-                // validate: validateSchoolResponse,
+                validate: validations.inputNumbersOnly,
             },
             {
                 name: 'department_name',
