@@ -18,7 +18,7 @@ This application helps a small business owner to organize the departments, roles
 	+ [Authors](#authors)
 ## Installation
 `````
- The heart of this project is NodeJS. Along with it you will need:
+ The heart of this project is NodeJS and MySQL. Along with them you will need:
  
        - mysql2
        - console.table
