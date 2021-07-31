@@ -69,9 +69,6 @@ run = async () => {
                 } = await employee_inquirer.fillData(roleArray, managerArray);
 
                 let {err} = await employee_inquirer.insertNewEmployee(pool, first_name, last_name, tools.findId(role_name, roleArray), tools.findId(manager_name, managerArray));
-
-                console.log("role_name: " + role_name);
-
                 break;
 
             }
@@ -82,7 +79,7 @@ run = async () => {
                 let roleArray = await role_inquirer.returnRoleArray(pool);
                 let {role_name} = await employee_inquirer.chooseRoleForEmployee(employee_name, roleArray);
                 let {err} = await employee_inquirer.updateEmployeeRole(pool, tools.findId(employee_name, employeeArray), tools.findId(role_name, roleArray));
-                let {err2} = await employee_inquirer.selectAll(pool);
+                let {err2} = await employee_inquirer.returnEmployeeTable(pool);
                 break;
             }
             case 'update_employee_manager' : { // !OK
