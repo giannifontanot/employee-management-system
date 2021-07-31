@@ -13,7 +13,6 @@ This application helps a small business owner to organize the departments, roles
 	* [Contributions](#contributions)
 - [🔗 Links](#---links)
 	+ [GitHub Repository](#github-repository)
-	+ [Live Link](#live-link)
 	+ [Support](#support)
 	+ [Authors](#authors)
 ## Installation
@@ -69,8 +68,6 @@ In case you need them, here are some guidelines: [Contributor Covenant](https://
 # 🔗 Links
 ### GitHub Repository
 [https://github.com/giannifontanot/employee-management-system/](https://github.com/giannifontanot/employee-management-system/)
-### Live Link
-[https://giannifontanot.github.io/live link](https://giannifontanot.github.io/live link)
 ### Support
 If you need help with this project, please write to: [giannifontanot@gmail.com](https://mailto:giannifontanot@gmail.com)
 ### Authors
