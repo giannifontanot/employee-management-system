@@ -3,7 +3,7 @@ const chalk = require("chalk");
 const tools = require("../lib/tools");
 
 module.exports = {
-    getOption: (gMessage) => {
+    getOption: () => {
         const questions = [
             {
                 name: 'option',

@@ -4,7 +4,7 @@
  * class INTERN
  */
 const inquirer = require('inquirer');
-const validations = require('validations');
+const validations = require('./validations');
 
 
 module.exports = {

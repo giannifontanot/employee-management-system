@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const console_table = require('console.table');
-const validations = require('validations');
+const validations = require('./validations');
 const queries = require('../../12-MySQL-Employee-Management-System/db/queries');
 const chalk = require("chalk");
 

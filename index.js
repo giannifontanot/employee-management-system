@@ -1,6 +1,7 @@
 const tools = require('./lib/tools');
 const mysql2 = require('mysql2/promise');
-let gMessage = '';
+const chalk = require("chalk");
+
 
 // Inquirer questions
 const employee_inquirer = require('./src/employee-inquirer');
@@ -8,15 +9,6 @@ const main_menu_inquirer = require('./src/main-menu-inquirer');
 const role_inquirer = require('./src/role-inquirer');
 const department_inquirer = require('./src/department-inquirer');
 
-// Classes
-const Employee = require('./lib/Employee');
-const Intern = require('./lib/Intern');
-const Manager = require('./lib/Manager');
-const Engineer = require('./lib/Engineer');
-const manager_inquirer = require("./src/manager-inquirer");
-const chalk = require("chalk");
-
-// Create a pool of DB connections
 
 // RUN FORREST, RUN!!
 run = async () => {
@@ -27,6 +19,7 @@ run = async () => {
     let bContinue = true;
 
     while (bContinue) {
+        // Create a pool of DB connections
         const pool = await mysql2.createPool({
             host: 'localhost',
             user: 'root',
@@ -37,7 +30,7 @@ run = async () => {
         });
 
         // What do you want to do?
-        const {option} = await main_menu_inquirer.getOption(gMessage);
+        const {option} = await main_menu_inquirer.getOption();
         switch (option) {
             case 'View all departments': {// !OK
                 let {err} = await department_inquirer.selectAll(pool);
@@ -68,15 +61,16 @@ run = async () => {
                 let manager_id = 0;
                 let roleArray = await role_inquirer.returnRoleArray(pool);
                 let managerArray = await employee_inquirer.returnManagerArray(pool);
-                let {first_name,
+                let {
+                    first_name,
                     last_name,
                     role_name,
                     manager_name
                 } = await employee_inquirer.fillData(roleArray, managerArray);
 
-                let {err} = await employee_inquirer.insertNewEmployee(pool,  first_name ,  last_name , tools.findId( role_name ,  roleArray ), tools.findId(manager_name, managerArray));
+                let {err} = await employee_inquirer.insertNewEmployee(pool, first_name, last_name, tools.findId(role_name, roleArray), tools.findId(manager_name, managerArray));
 
-                 console.log("role_name: " + role_name);
+                console.log("role_name: " + role_name);
 
                 break;
 
@@ -162,7 +156,7 @@ run = async () => {
             case 'budget_by_department' : {
                 let departmentArray = await department_inquirer.returnDepartmentArray(pool);
                 let {department_name} = await department_inquirer.chooseDepartment(departmentArray);
-                let  budget  = await role_inquirer.getBudget(pool,tools.findId(department_name,departmentArray));
+                let budget = await role_inquirer.getBudget(pool, tools.findId(department_name, departmentArray));
                 const sDepartment = chalk.bgGray(`${department_name} department`);
                 console.log(chalk.blue(`The budget of the ${sDepartment} is $${new Intl.NumberFormat().format(budget)}.00`));
                 break;
@@ -177,7 +171,7 @@ run = async () => {
 
 // RUN FORREST, RUN!!
 run().then(r => {
-console.log('THE END');
+    console.log('THE END');
 });
 
 
