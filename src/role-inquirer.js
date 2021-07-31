@@ -50,7 +50,7 @@ module.exports = {
 
             if (result[0].length > 0) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
 
@@ -78,12 +78,15 @@ module.exports = {
     insertNewRole: async (pool, title, salary, department_id) => {
         return await pool.execute(queries.insert_new_role(title, salary, department_id));
     },
-    returnRoleArray: async (pool) => { // !HERE
+    returnRoleArray: async (pool) => {
         const [rows, fields] = await pool.execute(queries.select_role_list());
- console.log("rows: " + JSON.stringify(rows));
         return rows;
 
     },
+    getBudget: async (pool, department_id) => {
+        const result = await pool.execute(queries.getBudget(department_id));
+        return result[0][0].budget;
 
+    },
 
 };

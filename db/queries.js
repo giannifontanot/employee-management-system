@@ -108,7 +108,11 @@ module.exports = {
                 FROM company_db.department
                 WHERE id = ${department_id}`;
     },
-
+    getBudget: (department_id) => {
+        return `SELECT SUM(role.salary) as budget
+                FROM company_db.role
+                WHERE role.department_id = ${department_id}`;
+    },
 
 }
 12

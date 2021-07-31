@@ -66,7 +66,10 @@ FROM company_db.department,  company_db.role
 WHERE company_db.department.id = company_db.role.department_id
   AND company_db.department.id = 1
 # --------------------- ----------------------
-
+SELECT SUM(role.salary) as budget
+FROM company_db.role
+WHERE role.department_id = 5
+# --------------------- ----------------------
 
 
 

@@ -160,8 +160,11 @@ run = async () => {
                 break;
             }
             case 'budget_by_department' : {
-                let {department_id} = await department_inquirer.select();
-                let {err} = await department_inquirer.budget('department_id');
+                let departmentArray = await department_inquirer.returnDepartmentArray(pool);
+                let {department_name} = await department_inquirer.chooseDepartment(departmentArray);
+                let  budget  = await role_inquirer.getBudget(pool,tools.findId(department_name,departmentArray));
+                const sDepartment = chalk.bgGray(`${department_name} department`);
+                console.log(chalk.blue(`The budget of the ${sDepartment} is $${new Intl.NumberFormat().format(budget)}.00`));
                 break;
             }
             case 'Quit': {

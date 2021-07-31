@@ -71,6 +71,7 @@ module.exports = {
     checkValidateGitHubResponse: (name) => {
         return validateNewDepartment(name);
     },
+
 }
 ;
 
