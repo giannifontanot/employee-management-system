@@ -75,7 +75,7 @@ run = async () => {
             case 'Update an employee role': { // !OK
                 let employeeArray = await employee_inquirer.returnEmployeeArray(pool);
                 let {employee_name} = await employee_inquirer.chooseEmployee(employeeArray);
-                let employee_id = tools.findId(undefined, employeeArray);
+                let employee_id = tools.findId(employee_name, employeeArray);
                 let roleArray = await role_inquirer.returnRoleArray(pool);
                 let {role_name} = await employee_inquirer.chooseRoleForEmployee(employee_name, roleArray);
                 let {err} = await employee_inquirer.updateEmployeeRole(pool, tools.findId(employee_name, employeeArray), tools.findId(role_name, roleArray));
@@ -85,7 +85,7 @@ run = async () => {
             case 'Update employee manager' : { // !OK
                 let employeeArray = await employee_inquirer.returnEmployeeArray(pool);
                 let {employee_name} = await employee_inquirer.chooseEmployee(employeeArray);
-                let employee_id = tools.findId(undefined, employeeArray);
+                let employee_id = tools.findId(employee_name, employeeArray);
                 let managerArray = await employee_inquirer.returnManagerArray(pool);
                 let {manager_name} = await employee_inquirer.chooseManagerForEmployee(employee_name, managerArray);
                 let {err} = await employee_inquirer.updateEmployeeManager(pool, tools.findId(employee_name, employeeArray), tools.findId(manager_name, managerArray));
